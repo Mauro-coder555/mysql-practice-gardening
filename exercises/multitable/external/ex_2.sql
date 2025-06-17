@@ -1,8 +1,7 @@
--- Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
+-- Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
 
-SELECT c.nombre_cliente, e.nombre
+SELECT c.*
 FROM cliente c
-INNER JOIN empleado e
-ON c.codigo_empleado_rep_ventas = e.codigo_empleado
-INNER JOIN pago p
-ON p.codigo_cliente = c.codigo_cliente
+LEFT JOIN pedido p
+ON c.codigo_cliente = p.codigo_cliente
+WHERE p.codigo_cliente IS NULL

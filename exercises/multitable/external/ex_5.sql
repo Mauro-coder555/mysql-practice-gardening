@@ -1,11 +1,7 @@
--- Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+-- Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
 
-SELECT c.nombre_cliente, e.nombre, o.ciudad
-FROM cliente c
-INNER JOIN empleado e
-ON c.codigo_empleado_rep_ventas = e.codigo_empleado
-INNER JOIN oficina o
-ON o.codigo_oficina = e.codigo_oficina
-LEFT JOIN pago p
-ON p.codigo_cliente = c.codigo_cliente
-WHERE p.codigo_cliente IS NULL
+SELECT e.*
+FROM empleado e
+LEFT JOIN cliente c
+ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+WHERE c.codigo_empleado_rep_ventas IS NULL
