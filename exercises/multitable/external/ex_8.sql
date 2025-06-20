@@ -1,6 +1,7 @@
--- Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+-- Devuelve un listado de los productos que nunca han aparecido en un pedido.
 
-SELECT e1.nombre AS nombre_empleado, e2.nombre AS nombre_jefe
-FROM empleado e1
-INNER JOIN empleado e2
-ON e1.codigo_jefe = e2.codigo_empleado
+SELECT p.*
+FROM producto p
+LEFT JOIN detalle_pedido d
+ON p.codigo_producto = d.codigo_producto
+WHERE d.codigo_producto IS NULL

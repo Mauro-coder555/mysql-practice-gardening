@@ -1,8 +1,9 @@
--- Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+-- Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
 
-SELECT e1.nombre AS nombre_empleado, e2.nombre AS nombre_jefe, e3.nombre AS nombre_jefe_del_jefe
-FROM empleado e1
-INNER JOIN empleado e2
-ON e1.codigo_jefe = e2.codigo_empleado
-INNER JOIN empleado e3
-ON e2.codigo_jefe = e3.codigo_empleado
+SELECT p.nombre, p.descripcion, g.imagen
+FROM producto p
+LEFT JOIN detalle_pedido d
+ON p.codigo_producto = d.codigo_producto
+LEFT JOIN gama_producto g
+ON p.gama = g.gama
+WHERE d.codigo_producto IS NULL
